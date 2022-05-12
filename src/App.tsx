@@ -1,10 +1,35 @@
-import { H1 } from "./styles/H1";
+import React, { useState } from 'react';
+import { MainRouter } from './routers/MainRouter';
+import { Container } from './styles/Container';
+import { NavBar } from './components/NavBar';
+import { AuthContextType } from './types/type';
 
+export const AuthContext = React.createContext<AuthContextType>({
+  auth: false,
+  setAuth: () => { },
+  name: '',
+  setName: () => { }
+});
 
-function App() {
+export const App = () => {
+  const [ auth, setAuth ] = useState(false);
+  const [ name, setName ] = useState('');
+
   return (
-    <H1>Hello World</H1>
+    <>
+      <NavBar />
+      <Container>
+        <AuthContext.Provider value={
+          {
+            auth: auth,
+            setAuth,
+            name: name,
+            setName
+          }
+        }>
+          <MainRouter />
+        </AuthContext.Provider>
+      </Container>
+    </>
   );
-}
-
-export default App;
+};
