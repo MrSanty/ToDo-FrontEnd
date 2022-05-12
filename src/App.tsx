@@ -17,19 +17,19 @@ export const App = () => {
 
   return (
     <>
-      <NavBar />
-      <Container>
-        <AuthContext.Provider value={
-          {
-            auth: auth,
-            setAuth,
-            name: name,
-            setName
-          }
-        }>
+      <AuthContext.Provider value={
+        {
+          auth: auth,
+          setAuth,
+          name: name,
+          setName
+        }
+      }>
+        <NavBar />
+        <Container>
           <MainRouter />
-        </AuthContext.Provider>
-      </Container>
+        </Container>
+      </AuthContext.Provider>
     </>
   );
 };

@@ -7,7 +7,6 @@ import { useContext, useEffect, useState } from 'react';
 import { validateAuth } from '../service/authService';
 import { PrivateRouter } from './PrivateRouter';
 import { Spinner } from '../styles/spinner';
-import { AuthRouter } from './AuthRouter';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 
@@ -35,10 +34,8 @@ export const MainRouter = () => {
     <Routes>
       {/* Public Routers */}
       <Route path='/' element={<Home />} />
-      <Route path='/' element={<AuthRouter auth={auth} />} >
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Register />} />
-      </Route>
+      <Route path='/login' element={ ( !auth ) ? <Login /> : <Home /> } />
+      <Route path='/signup' element={ ( !auth ) ? <Register /> : <Home /> } />
 
       {/* Private Routers */}
       <Route path="/" element={<PrivateRouter auth={auth} />}>

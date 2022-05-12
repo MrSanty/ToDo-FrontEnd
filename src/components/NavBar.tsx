@@ -8,19 +8,30 @@ import { useContext } from 'react';
 
 export const NavBar = ( ) => {
   const { auth, name } = useContext(AuthContext);
-
   return (
     <>
       <Nav >
-        <H1 isNav={ true}  ><Link to="/">Todo List</Link></H1>
+        <H1 isNav={ true }  ><Link to="/">Todo List</Link></H1>
+        
         <Links>
-          <NavLink
-            to="/login"
-            className={ ({ isActive }) => (isActive) ? "active" : "" }
-          >
-            Ingresar
-          </NavLink>
-          <NavLink to="/register">Registrarse</NavLink>
+          {
+            !auth && (
+              <>
+                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/signup">Signup</NavLink>
+              </>
+            )
+          }
+          {
+            ( auth ) && (
+              <>
+                <h2>{ name }</h2>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+                <NavLink to="/list">List</NavLink>
+                <NavLink to="/logout">Logout</NavLink>
+              </>
+            )
+          }
         </Links>
       </Nav>
     </> 
